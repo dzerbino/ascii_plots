@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+
+import sys
+import os
+
+# Read params
+if len(sys.argv) > 1:
+	step = float(sys.argv[1])
+else:
+	step = 1
+
+complete = False
+
+# Read values
+freq = dict()
+if 'COLUMNS' in os.environ:
+	width = os.environ['COLUMNS']
+else:
+	width = 80
+total = 0
+
+for line in sys.stdin:
+	if len(line.strip()) > 0:
+		try: 
+			items = line.strip().split()
+			val = int(float(items[0]) / step)
+
+			if len(items) > 1:
+				count = float(items[1])
+			else:
+				count = 1
+
+			if count == 0:
+				continue
+
+			if val in freq:
+				freq[val] += count
+			else:
+				freq[val] = count
+			total += 1
+		except:
+			continue
+
+# Print histogram
+max = max(freq.values())
+
+if complete:
+	for c in range(min(freq.keys()), max(freq.keys()), step):
+		if c in freq:
+		    f = freq[c]
+		else:
+		    f = 0
+		N = int( f  * width / max )
+		print "%6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
+else:
+	for c in sorted(freq.keys()):
+		f = freq[c]
+		N = int( f  * width / max )
+		print "%6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
+
+print "TOTAL    | %6d |\n" % total

@@ -1,0 +1,21 @@
+#!/bin/awk -f
+
+{
+	if (NF != 2) {
+		print "Irregular number of columns!";
+		exit 1;
+	} 
+
+	for (i = 1; i <= 2; i++) { 
+		sum[i] += $i; 
+		sumsq[i] += $i * $i; 
+	}
+	sumprod += $1 * $2;
+} 
+
+END {
+	cov = sumprod / NR - (sum[1] / NR) * (sum[2] / NR);
+	sd1 = sqrt(sumsq[1]/NR - sum[1]*sum[1]/(NR*NR));
+	sd2 = sqrt(sumsq[2]/NR - sum[2]*sum[2]/(NR*NR));
+	print cov / (sd1 * sd2)
+}

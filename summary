@@ -1,0 +1,51 @@
+#!/bin/awk -f
+
+NR == 1 {
+	columns = NF
+	for (i = 1; i <= columns; i++) {
+		min[i] = $i; 
+		max[i] = $i; 
+	}
+} 
+
+{
+	if (NF != columns) {
+		print "Irregular number of columns!";
+		exit 1;
+	} 
+
+	for (i = 1; i <= columns; i++) { 
+		sum[i] += $i; 
+		if ($i < min[i]) 
+			min[i] = $i; 
+		if ($i > max[i]) 
+			max[i] = $i;
+	}
+} 
+
+END {
+	printf "COL | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11d |", i;
+	print "";
+
+	printf "MIN | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11.6g |", min[i];
+	print "";
+
+	printf "AVG | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11.6g |", sum[i]/NR;
+	print "";
+
+	printf "MAX | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11.6g |", max[i];
+	print "";
+
+	printf "SUM | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11.6g |", sum[i];
+	print "";
+}
