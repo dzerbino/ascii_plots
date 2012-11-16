@@ -1,16 +1,24 @@
 #!/bin/awk -f
 
+
+function isnum(x) {
+	return (x == x + 0 )
+}
+
+
 {
 	if (NF != 2) {
 		print "Irregular number of columns!";
 		exit 1;
 	} 
 
-	for (i = 1; i <= 2; i++) { 
-		sum[i] += $i; 
-		sumsq[i] += $i * $i; 
+	if (isnum($1) && isnum($2)) {
+		for (i = 1; i <= 2; i++) { 
+			sum[i] += $i; 
+			sumsq[i] += $i * $i; 
+		}
+		sumprod += $1 * $2;
 	}
-	sumprod += $1 * $2;
 } 
 
 END {

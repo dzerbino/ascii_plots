@@ -1,12 +1,15 @@
 #!/bin/awk -f
 
+function isnum(x) {
+	return (x == x + 0 )
+}
+
 NR == 1 {
-	columns = NF
+	columns = NF;
 	for (i = 1; i <= columns; i++) {
-		min[i] = $i; 
-		max[i] = $i; 
+		header[i] = $i;
 	}
-} 
+}
 
 {
 	if (NF != columns) {
@@ -15,11 +18,19 @@ NR == 1 {
 	} 
 
 	for (i = 1; i <= columns; i++) { 
-		sum[i] += $i; 
-		if ($i < min[i]) 
-			min[i] = $i; 
-		if ($i > max[i]) 
-			max[i] = $i;
+		if (isnum($i)) {
+			sum[i] += $i; 
+			if (!first[i]) {
+				min[i] = $i; 
+				max[i] = $i;
+				first[i] = 0;
+			} else {
+				if ($i < min[i]) 
+					min[i] = $i; 
+				if ($i > max[i]) 
+					max[i] = $i;
+			}
+		}
 	}
 } 
 
@@ -27,6 +38,11 @@ END {
 	printf "COL | "
 	for (i = 1; i <= columns; i++) 
 		printf "%11d |", i;
+	print "";
+
+	printf "NAM | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11s |", header[i];
 	print "";
 
 	printf "MIN | "
