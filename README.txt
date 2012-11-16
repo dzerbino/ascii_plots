@@ -33,3 +33,8 @@ For a quick demo, run:
 
 > cut -f1,2 test.csv | ./scatter
 > awk 'func r(){return sqrt(-2*log(rand()))*cos(6.2831853*rand())}BEGIN{for(i=0;i<10000;i++)s=s"\n"0.5*r()"\t"0.5*r();print s}' | ./scatter
+
+* curve:
+	Draws a curve from a single column of numbers [NOTE: requires scatter to be in the same directory]
+
+> awk 'BEGIN{for(i=0;i<100;i++)s=s"\n"sin(i/10);print s}' | ./curve 
