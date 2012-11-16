@@ -23,8 +23,10 @@ hist - histogram:
 cut -f1 test.csv | ./hist
 cut -f1 test.csv | ./hist 10
 cut -f1,2 test.csv | ./hist
+awk 'func r(){return sqrt(-2*log(rand()))*cos(6.2831853*rand())}BEGIN{for(i=0;i<10000;i++)s=s"\n"0.5*r();print s}' | hist 0.1
 
 scatter:
 	Takes in a double column of numbers, and displays a sketchy ascii density plot.
 
 cut -f1,2 test.csv | ./scatter
+awk 'func r(){return sqrt(-2*log(rand()))*cos(6.2831853*rand())}BEGIN{for(i=0;i<10000;i++)s=s"\n"0.5*r()"\t"0.5*r();print s}' | ./scatter
