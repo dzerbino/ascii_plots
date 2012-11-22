@@ -2,10 +2,12 @@
 
 import sys
 import os
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 # Read params
 if len(sys.argv) > 1:
-	step = float(sys.argv[1])
+	step = locale.atof(sys.argv[1])
 else:
 	step = 1
 
@@ -23,10 +25,10 @@ for line in sys.stdin:
 	if len(line.strip()) > 0:
 		try: 
 			items = line.strip().split()
-			val = int(float(items[0]) / step)
+			val = int(locale.atof(items[0]) / step)
 
 			if len(items) > 1:
-				count = float(items[1])
+				count = locale.atof(items[1])
 			else:
 				count = 1
 
