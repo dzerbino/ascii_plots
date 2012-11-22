@@ -2,6 +2,8 @@
 
 import sys
 import os
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 scale = ' .\'\`^",:;Il!i><~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$'
 scale_range = len(scale) - 1
@@ -38,13 +40,13 @@ minY = None
 maxY = None
 for line in sys.stdin:
 	try:
-	    (x,y) = map(float, line.strip().split())
+	    (x,y) = map(locale.atof, line.strip().split())
 	except: 
 	    continue
 
-	if x == float("Inf") or y == float("Inf"):
+	if x == locale.atof("Inf") or y == locale.atof("Inf"):
 	    continue
-	if x == float("-Inf") or y == float("-Inf"):
+	if x == locale.atof("-Inf") or y == locale.atof("-Inf"):
 	    continue
 
 	if minX is None or x < minX:
