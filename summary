@@ -1,4 +1,4 @@
-#!/bin/awk -f
+#!/usr/bin/env awk -f
 
 function isnum(x) {
 	return (x == x + 0 )
