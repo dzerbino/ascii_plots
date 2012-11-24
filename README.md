@@ -5,11 +5,12 @@ data analysis and can't be bothered to start R. They all receive the data by pip
 They all handle non-numeric data as NA.
 
 # author
-[https://github.com/dzerbino/](Daniel Zerbino)
+[Daniel Zerbino](https://github.com/dzerbino/)
 
 
 # Use
 For a quick demo, run:
+
     > sh demo.sh
 
 ## cor - correlation:
@@ -34,6 +35,7 @@ Either:
 * Takes in a single column of numbers, displays histogram
 * Takes in a double column of numbers, and displays a weighted histogram of the data, assuming the first column are values and the second column weights. The size of the bins is 1 by default, but can be specified as an option
 
+```shell
     > awk 'func r(){return sqrt(-2*log(rand()))*cos(6.2831853*rand())}BEGIN{for(i=0;i<10000;i++)s=s"\n"0.5*r();print s}' | ./hist 0.1
     -1.800000 |      1 | 
     -1.600000 |      4 | 
@@ -74,7 +76,7 @@ Either:
      1.900000 |      2 | 
      2.000000 |      1 | 
     TOTAL     |  10000 |
-
+```
 ## scatter:
 Takes in a double column of numbers, and displays a sketchy ascii density plot.
 
