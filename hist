@@ -16,7 +16,7 @@ complete = False
 # Read values
 freq = dict()
 if 'COLUMNS' in os.environ:
-	width = os.environ['COLUMNS']
+	width = int(os.environ['COLUMNS'])
 else:
 	width = 80
 total = 0
@@ -44,7 +44,10 @@ for line in sys.stdin:
 			continue
 
 # Print histogram
-max = max(freq.values())
+if freq.values() != []:
+        max = max(freq.values())
+else:
+        sys.exit(1)
 
 if complete:
 	for c in range(min(freq.keys()), max(freq.keys()), step):
@@ -53,11 +56,11 @@ if complete:
 		else:
 		    f = 0
 		N = int( f  * width / max )
-		print "%6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
+		print "% 6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
 else:
 	for c in sorted(freq.keys()):
 		f = freq[c]
 		N = int( f  * width / max )
-		print "%6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
+		print "% 6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
 
-print "TOTAL    | %6d |\n" % total
+print "TOTAL     | %6d |\n" % total
