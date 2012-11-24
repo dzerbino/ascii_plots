@@ -33,7 +33,9 @@ Takes in stdin a tab delimited data file with or without headers (anything numer
 ## hist - histogram:
 Either:
 * Takes in a single column of numbers, displays histogram
-* Takes in a double column of numbers, and displays a weighted histogram of the data, assuming the first column are values and the second column weights. The size of the bins is 1 by default, but can be specified as an option
+* Takes in a double column of numbers, and displays a weighted histogram of the data, assuming the first column are values and the second column weights. 
+
+The size of the bins is 1 by default, but can be specified as an option
 
 ```shell
     > awk 'func r(){return sqrt(-2*log(rand()))*cos(6.2831853*rand())}BEGIN{for(i=0;i<10000;i++)s=s"\n"0.5*r();print s}' | ./hist 0.1
