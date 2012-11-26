@@ -1,4 +1,4 @@
-#!/usr/bin/env awk -f
+#!/usr/bin/awk -f
 
 function isnum(x) {
 	return (x == x + 0 )
@@ -23,7 +23,7 @@ NR == 1 {
 			if (!first[i]) {
 				min[i] = $i; 
 				max[i] = $i;
-				first[i] = 0;
+				first[i] = 1;
 			} else {
 				if ($i < min[i]) 
 					min[i] = $i; 
