@@ -40,6 +40,11 @@ END {
 		printf "%11d |", i;
 	print "";
 
+	printf "LEN | "
+	for (i = 1; i <= columns; i++) 
+		printf "%11.6g |", NR;
+	print "";
+
 	printf "NAM | "
 	for (i = 1; i <= columns; i++) 
 		printf "%11s |", header[i];
