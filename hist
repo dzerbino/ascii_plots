@@ -56,11 +56,11 @@ if complete:
 		else:
 		    f = 0
 		N = int( f  * width / max )
-		print "% 6f | %6.2f%% | %6d | %s\n" % (c * step, f/total, f, ''.join('*' for X in range(N))),
+		print "% 6f | %6g | %6g | %s\n" % (c * step, f/total, f, ''.join('*' for X in range(N))),
 else:
 	for c in sorted(freq.keys()):
 		f = freq[c]
 		N = int( f  * width / max )
-		print "% 6f | %6.2f%% | %6d | %s\n" % (c * step, f/total, f, ''.join('*' for X in range(N))),
+		print "% 6f | %6g | %6g | %s\n" % (c * step, f/total, f, ''.join('*' for X in range(N))),
 
-print "TOTAL     | %6d |\n" % total
+print "TOTAL     | %6d | %6d |\n" % (1, total)
