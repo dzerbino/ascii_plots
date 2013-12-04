@@ -19,7 +19,7 @@ if 'COLUMNS' in os.environ:
 	width = int(os.environ['COLUMNS'])
 else:
 	width = 80
-total = 0
+total = 0.0
 
 for line in sys.stdin:
 	if len(line.strip()) > 0:
@@ -39,7 +39,7 @@ for line in sys.stdin:
 				freq[val] += count
 			else:
 				freq[val] = count
-			total += 1
+			total += count
 		except:
 			continue
 
@@ -56,11 +56,11 @@ if complete:
 		else:
 		    f = 0
 		N = int( f  * width / max )
-		print "% 6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
+		print "% 6f | %6.2f%% | %6d | %s\n" % (c * step, f/total, f, ''.join('*' for X in range(N))),
 else:
 	for c in sorted(freq.keys()):
 		f = freq[c]
 		N = int( f  * width / max )
-		print "% 6f | %6d | %s\n" % (c * step, f, ''.join('*' for X in range(N))),
+		print "% 6f | %6.2f%% | %6d | %s\n" % (c * step, f/total, f, ''.join('*' for X in range(N))),
 
 print "TOTAL     | %6d |\n" % total
