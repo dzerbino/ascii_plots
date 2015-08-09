@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import locale
+locale.setlocale(locale.LC_ALL, '')
+
+# Read values
+freq = dict()
+if 'COLUMNS' in os.environ:
+	width = int(os.environ['COLUMNS'])
+else:
+	width = 80
+total = 0.0
+
+for line in sys.stdin:
+	if len(line.strip()) > 0:
+		try: 
+			items = line.strip().split()
+			val = items[0]
+
+			if val in freq:
+				freq[val] += 1
+			else:
+				freq[val] = 1
+			total += 1
+		except:
+			continue
+
+# Print histogram
+if freq.values() != []:
+        max = max(freq.values())
+else:
+        sys.exit(1)
+
+for c in sorted(freq.keys()):
+	f = freq[c]
+	N = int( f  * width / max )
+	print "%16s | %10.4g | %10.4g | %s\n" % (c, f/total, f, ''.join('*' for X in range(N))),
+
+print "TOTAL            | %10d | %10d |\n" % (1, total)

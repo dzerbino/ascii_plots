@@ -79,6 +79,20 @@ The size of the bins is 1 by default, but can be specified as an option
          2 |     0.0001 |          1 | 
 TOTAL      |          1 |      10000 |
 ```
+
+## bars:
+
+Like histogram, but for categorical data:
+
+    > cut -f1 test.tsv | ./bars
+
+		 1.0 |       0.25 |          1 | ********************************************************************************
+		 4.0 |       0.25 |          1 | ********************************************************************************
+		 7.0 |       0.25 |          1 | ********************************************************************************
+		   A |       0.25 |          1 | ********************************************************************************
+    TOTAL            |          1 |          4 |
+
+
 ## scatter:
 Takes in a double column of numbers, and displays a sketchy ascii density plot.
 
