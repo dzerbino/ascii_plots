@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import sys
 import collections
@@ -40,5 +41,5 @@ for index in range(column_count):
 		total = sum(values)
 		mean = total / len(values)
 		sd = math.sqrt(sum((value - mean)**2 for value in values) / len(values))
-		summary = "%i sampled numerical values: %f ± %f (total = %f)" % (len(values), mean, sd, total)
+		summary = "%i sampled numerical values: %f ±%f; total = %f" %  (len(values), mean, sd, total)
 	print("\t".join(map(str, [index+1, headers[index], summary])))
