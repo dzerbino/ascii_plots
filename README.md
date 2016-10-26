@@ -184,3 +184,15 @@ Draws a curve from a single column of numbers [NOTE: requires scatter to be in t
     |                                                      $                                                             |
     ---------------------------------------------------------------------------------------------------------------------- -0.999923
     2.000000                                                                                                    101.000000
+
+## column\_descriptions:
+Extracts the header and a number of sample values from each column:
+
+```
+> cat test.tsv | ./column_descriptions
+1	A	3 sampled numerical values: 4.000000 ± 2.449490 (total = 12.000000)
+2	B	5, NA, 2
+3	C	NA, 6, 9
+```
+4	D	NA
+

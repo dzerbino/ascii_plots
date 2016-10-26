@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+import sys
+import collections
+import math
+import re
+
+# Read headers
+headers = sys.stdin.readline().strip().split('\t')
+column_count = len(headers)
+
+# Read through first 1000 lines of file
+counter = 0
+data = [[] for column in headers]
+while 1:
+	line = sys.stdin.readline()
+	if line is None or len(line) == 0:
+		break
+	items = line.strip().split('\t')
+	counter += 1
+	if counter >= 1000:
+		break
+	if len(items) != column_count:
+		sys.stderr.write("Irregular number of columns at line %i: found %i instead of %i\n" % (counter, len(items), column_count))
+	for column_data, item in zip(data, items):
+		column_data.append(item)
+	
+# Print out stats
+for index in range(column_count):
+	column_data = data[index]
+	if any(re.match("^-?\d+?\.?\d+$", value) is None for value in column_data):
+		examples = [item[0] for item in collections.Counter(data[index]).most_common(10)]
+		if len(examples) == 10:
+			examples.append('...')
+		summary = ", ".join(examples)
+		if len(summary) > 100:
+			summary = summary[:100] + '[...]'
+	else:
+		values = list(map(float, column_data))
+		total = sum(values)
+		mean = total / len(values)
+		sd = math.sqrt(sum((value - mean)**2 for value in values) / len(values))
+		summary = "%i sampled numerical values: %f ± %f (total = %f)" % (len(values), mean, sd, total)
+	print("\t".join(map(str, [index+1, headers[index], summary])))
