@@ -29,7 +29,7 @@ while 1:
 # Print out stats
 for index in range(column_count):
 	column_data = data[index]
-	if any(re.match("^-?\d+?\.?\d+$", value) is None for value in column_data):
+	if any(re.match("^-?\d+\.?\d*?[Ee]?-?\d*?$", value) is None for value in column_data):
 		examples = [item[0] for item in collections.Counter(data[index]).most_common(10)]
 		if len(examples) == 10:
 			examples.append('...')
