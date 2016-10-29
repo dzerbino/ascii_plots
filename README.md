@@ -193,6 +193,6 @@ Extracts the header and a number of sample values from each column:
 1	A	3 sampled numerical values: 4.000000 ± 2.449490 (total = 12.000000)
 2	B	5, NA, 2
 3	C	NA, 6, 9
-```
 4	D	NA
+```
 
